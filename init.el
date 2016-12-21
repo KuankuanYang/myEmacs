@@ -2,57 +2,26 @@
 ;; installed packages.  Don't delete this line.  If you don't want it,
 ;; just comment it out by adding a semicolon to the start of the line.
 ;; You may delete these explanatory comments.
-;; 将 melpa 设为软件源
-(when (>= emacs-major-version 24)
-    (require 'package)
-    (package-initialize)
-    (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t))
 
-;; cl - Common Lisp Extension
-(require 'cl)
 
-;; Add Packages
-(defvar my/packages '(
-		      ;; --- Auto-completion ---
-		      company
-		      ;; --- Better Editor ---
-		      hungry-delete
-		      swiper
-		      counsel
-		      smartparens
-		      ;; --- Major Mode ---
-		      ;;js2-mode
-		      ;; --- Minor Mode ---
-		      ;;nodejs-repl
-		      exec-path-from-shell
-		      ;; --- Themes ---
-		      monokai-theme
-		      ;;solarized-theme
-		      ) "Default packages")
+;; Added by Package.el.  This must come before configurations of
+;; installed packages.  Don't delete this line.  If you don't want it,
+;; just comment it out by adding a semicolon to the start of the line.
+;; You may delete these explanatory comments.
+(package-initialize)
 
-(setq package-selected-packages my/packages)
+(add-to-list 'load-path "~/.emacs.d/lisp/")
+(require 'init-packages)
 
-(defun my/packages-installed-p ()
-    (loop for pkg in my/packages
-	  when (not (package-installed-p pkg)) do (return nil)
-	  finally (return t)))
 
-(unless (my/packages-installed-p)
-    (message "%s" "Refreshing package database...")
-    (package-refresh-contents)
-    (dolist (pkg my/packages)
-      (when (not (package-installed-p pkg))
-	(package-install pkg))))
 
-;; Find Executable Path on OS X
-(when (memq window-system '(mac ns))
-  (exec-path-from-shell-initialize))
+;; 关闭声音
+(setq ring-bell-function 'ignore)
 
 ;; 全屏开启
 (setq initial-frame-alist (quote ((fullscreen . maximized))))
 
-;; 载入主题 monokai
-(load-theme 'monokai t)
+
 
 ;; 关闭工具栏，tool-bar-mode 即为一个 Minor Mode
 (tool-bar-mode -1)
@@ -80,9 +49,6 @@
 
 ;; 这一行代码，将函数 open-init-file 绑定到 <f2> 键上
 (global-set-key (kbd "<f2>") 'open-init-file)
-
-;; 开启全局 Company 补全
-(global-company-mode 1)
 
 ;; 关闭自动备份
 (setq make-backup-files nil)
@@ -113,13 +79,7 @@
 ;; 设置 org-agenda 打开快捷键
 (global-set-key (kbd "C-c a") 'org-agenda)
 
-;; 配置 hungry-delete
-(require 'hungry-delete)
-(global-hungry-delete-mode)
-
 ;; 配置 counsel 和 swiper
-(ivy-mode 1)
-(setq ivy-use-virtual-buffers t)
 (global-set-key "\C-s" 'swiper)
 (global-set-key (kbd "C-c C-r") 'ivy-resume)
 (global-set-key (kbd "M-x") 'counsel-M-x)
@@ -127,10 +87,9 @@
 (global-set-key (kbd "C-h f") 'counsel-describe-function)
 (global-set-key (kbd "C-h v") 'counsel-describe-variable)
 
-;; 配置 smartparens
-(require 'smartparens-config)
-(add-hook 'emacs-lisp-mode-hook 'smartparens-mode)
-;; (smartparens-global-mode t)
+
+
+
 
 ;; 括号匹配
 (add-hook 'emacs-lisp-mode-hook 'show-paren-mode)
