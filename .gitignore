@@ -13,3 +13,5 @@
 # My configuration
 elpa
 recentf
+.cache
+.DS_Store
