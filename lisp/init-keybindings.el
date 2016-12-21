@@ -19,4 +19,7 @@
 (global-set-key (kbd "C-h f") 'counsel-describe-function)
 (global-set-key (kbd "C-h v") 'counsel-describe-variable)
 
+;; 绑定 counsel-git
+(global-set-key (kbd "C-c g f") 'counsel-git)
+
 (provide 'init-keybindings)
