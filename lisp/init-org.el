@@ -11,4 +11,11 @@
 ;; 设置 org-agenda 打开快捷键
 (global-set-key (kbd "C-c a") 'org-agenda)
 
+;; 自动换行
+(add-hook 'org-mode-hook (lambda () (setq truncate-lines nil)))
+
+;; 定义 TODO 常用关键词
+(setq org-todo-keywords '((type "Assignment(a!)" "Exam(e!)" "Study(s!)" "English(E!)" "|")
+			  (sequence "PENDING(p!)" "TODO(t!)" "|" "DONE(d!)" "ABORT(a@/!)")))
+
 (provide 'init-org)

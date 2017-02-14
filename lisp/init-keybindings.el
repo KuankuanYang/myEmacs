@@ -22,4 +22,20 @@
 ;; 绑定 counsel-git
 (global-set-key (kbd "C-c g f") 'counsel-git)
 
+;; 绑定 indent-region-or-buffer
+(global-set-key (kbd "C-M-\\") 'indent-region-or-buffer)
+
+;; 绑定 hippie-expand（自动补全)
+(global-set-key (kbd "s-/") 'hippie-expand)
+
+;; 主动加载 Dired Mode
+;;(require 'dired)
+;;(define-key dired-mode-map (kbd "RET") 'dired-find-alternate-file)
+;; 延迟加载
+(with-eval-after-load 'dired
+  (define-key dired-mode-map (kbd "RET") 'dired-find-alternate-file))
+
+;; 绑定 reveal-in-osx-finder
+(global-set-key (kbd "C-c z") 'reveal-in-osx-finder)
+
 (provide 'init-keybindings)
